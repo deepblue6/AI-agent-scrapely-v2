@@ -1,0 +1,32 @@
+{
+  "name": "ai-agent-scrapely",
+  "version": "2.0.0",
+  "description": "AI Setter agent for Scrapely \u2014 handles webhook replies, generates AI responses, sends follow-ups via Twitter DMs. Runs on Cloudflare Workers.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "secrets": "wrangler secret bulk .env",
+    "logs": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "OPENROUTER_API_KEY": {
+        "description": "Powers the AI replies. Create one at [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys) and add credits at [openrouter.ai/settings/credits](https://openrouter.ai/settings/credits). Starts with sk-or-."
+      },
+      "SCRAPELY_API_KEY": {
+        "description": "Scrapely dashboard \u2192 Settings \u2192 API Keys \u2192 Create Key."
+      },
+      "CALENDAR_LINK": {
+        "description": "Your booking link (Calendly, Cal.com, etc.). The AI shares it when pushing for a call."
+      },
+      "WEBHOOK_SECRETS": {
+        "description": "Leave the placeholder for now. After deploying, add your Worker URL as a webhook in Scrapely (Settings \u2192 Global Webhook), copy the X-Webhook-Key it generates, and paste it here in Cloudflare (Worker \u2192 Settings \u2192 Variables and Secrets)."
+      }
+    }
+  }
+}

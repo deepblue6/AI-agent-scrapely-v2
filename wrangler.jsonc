@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ai-setter-agent",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+
+  // Bundle offer.md + instructions.md into the Worker so the AI can read them
+  "rules": [{ "type": "Text", "globs": ["**/*.md"], "fallthrough": true }],
+
+  "durable_objects": {
+    "bindings": [
+      { "name": "CONVERSATIONS", "class_name": "Conversation" },
+      { "name": "FOLLOWUPS", "class_name": "FollowupScanner" }
+    ]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Conversation", "FollowupScanner"] }],
+
+  // Check for leads that need a follow-up every hour
+  "triggers": { "crons": ["0 * * * *"] },
+
+  // Keep logs so you can see what the agent did in the Cloudflare dashboard
+  "observability": { "enabled": true }
+}

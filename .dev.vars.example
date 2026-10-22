@@ -1,0 +1,29 @@
+# =============================================================================
+# AI Setter Agent — Secrets
+# =============================================================================
+# Deploy button: Cloudflare asks for each of these during setup.
+#
+# Command line: copy this file to .env and fill in your values:
+#   cp .dev.vars.example .env
+# then upload them to Cloudflare (after the first deploy):
+#   npm run secrets
+# `npm run dev` also reads .env when running locally.
+# =============================================================================
+
+# OpenRouter API key — used for generating AI replies (Claude via OpenRouter)
+# Get yours at: https://openrouter.ai/settings/keys
+# IMPORTANT: Add credits at https://openrouter.ai/settings/credits before the key will work
+OPENROUTER_API_KEY=sk-or-...
+
+# Scrapely API key — used for fetching conversations, sending DMs, updating CRM
+# Find this in your Scrapely dashboard under Settings > API
+SCRAPELY_API_KEY=your-scrapely-api-key
+
+# Your booking/calendar link — this gets dropped into conversations when pushing for a call
+CALENDAR_LINK=https://calendly.com/your-link
+
+# Webhook authentication — Scrapely sends this header with every webhook request
+# Find it in: Scrapely Dashboard → Settings → Global Webhook → your webhook's X-Webhook-Key
+# Scrapely only gives you this AFTER you've added your Worker URL, so on the first
+# deploy leave the placeholder and set the real value afterwards (see README).
+WEBHOOK_SECRETS=your-webhook-secret-here
